@@ -54,13 +54,15 @@ func GetForm(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(queryString.Get("id"), 10, 64)
 
 	var data map[string]interface{}
+	var mahasiswa entities.Mahasiswa
 
 	if err != nil {
 		data = map[string]interface{}{
 			"title": "Tambah Data Mahasiswa",
+			"mahasiswa": mahasiswa,
 		}
 	} else {
-		var mahasiswa entities.Mahasiswa
+		
 		err := mahasiswaModel.Find(id, &mahasiswa)
 		if err != nil {
 			panic(err)
